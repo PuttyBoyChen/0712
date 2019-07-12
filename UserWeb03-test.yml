@@ -1,0 +1,37 @@
+server:
+  port: 9003
+spring:
+  thymeleaf:
+    cache: false
+    application:
+    name: UserWeb03
+
+  cloud:
+    loadbalancer:
+      retry:
+        enabled: true
+USERPROVIDER:
+  ribbon:
+
+    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RoundRobinRule
+
+    ConnectTimeout: 250
+   
+    ReadTimeout: 250
+   
+    OkToRetryOnAllOperations: true
+  
+    MaxAutoRetriesNextServer: 1
+ 
+    MaxAutoRetries: 1
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:10086/eureka,http://localhost:10087/eureka
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 3000
